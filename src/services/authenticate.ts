@@ -21,13 +21,13 @@ export class AuthenticateService {
     const user = await this.usersRepository.findUserByEmail(email);
 
     if (!user) {
-      throw new Error();
+      throw new Error('User not found');
     }
 
-    const doestPasswordMatches = await compare(password, user.password);
+    const doesPasswordMatch = await compare(password, user.password);
 
-    if (!doestPasswordMatches) {
-      throw new Error();
+    if (!doesPasswordMatch) {
+      throw new Error('Password does not match');
     }
 
     return {

@@ -18,7 +18,7 @@ export class CartRepository {
     });
   }
 
-  async createCart(userId: string): Promise<Cart> {
+  async createCart(userId: string): Promise<Cart | null> {
     return prisma.cart.create({
       data: {
         userId,
@@ -46,7 +46,7 @@ export class CartRepository {
     productId: string,
     quantity: number,
     unitPrice: number
-  ): Promise<CartItem> {
+  ): Promise<CartItem | null> {
     return prisma.cartItem.create({
       data: {
         cartId,
@@ -60,14 +60,17 @@ export class CartRepository {
   async updateCartItem(
     cartItemId: string,
     quantity: number
-  ): Promise<CartItem> {
+  ): Promise<CartItem | null> {
     return prisma.cartItem.update({
       where: { id: cartItemId },
       data: { quantity },
     });
   }
 
-  async updateCartTotal(cartId: string, totalPrice: number): Promise<Cart> {
+  async updateCartTotal(
+    cartId: string,
+    totalPrice: number
+  ): Promise<Cart | null> {
     return prisma.cart.update({
       where: { id: cartId },
       data: { totalPrice },

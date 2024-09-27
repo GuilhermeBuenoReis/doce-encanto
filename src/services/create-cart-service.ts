@@ -1,9 +1,9 @@
 // src/services/createCartService.ts
-import { CartRepository } from '../repositories/cart-repository';
+import type { CartRepository } from '../repositories/cart-repository';
 import type { Cart } from '@prisma/client';
 
 export class CreateCartService {
-  private cartRepository = new CartRepository();
+  constructor(private cartRepository: CartRepository) {}
 
   async createCart(userId: string): Promise<Cart> {
     return this.cartRepository.createCart(userId);
