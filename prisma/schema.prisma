@@ -8,43 +8,37 @@ datasource db {
 }
 
 model User {
-  id String @id @default(cuid())
-  email String @unique
-  name String
-  password String
+  id       String @id @default(cuid())
+  name     String
+  password String @default("temporary-password")
+  email    String @unique
+  carts    Cart[]
 }
 
 model Product {
   id          String     @id @default(cuid())
   name        String
-  description String?
+  description String
   price       Float
-  imageUrl    String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-
+  imageUrl    String     @default("temporary-imageUrl")
   cartItems   CartItem[]
 }
 
 model Cart {
-  id        String      @id @default(cuid())
-  userId    String?     
-  items     CartItem[]  @relation("CartItems")
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-
-  CartItem CartItem[]
+  id         String     @id @default(cuid())
+  user       User       @relation(fields: [userId], references: [id])
+  userId     String
+  cartItems  CartItem[]
+  totalPrice Float      @default(0.0)
+  status     String     @default("active")
 }
 
 model CartItem {
-  id        String   @id @default(cuid())
-  cartId    String   // Relacionamento com Cart
-  productId String   // Relacionamento com Product
-  quantity  Int      @default(1)
-  price     Float
-
-  cart      Cart     @relation(fields: [cartId], references: [id])
-  product   Product  @relation(fields: [productId], references: [id])
-
-  Cart Cart[] @relation("CartItems")
+  id        String  @id @default(cuid())
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  cartId    String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int     @default(1)
+  unitPrice Float
 }

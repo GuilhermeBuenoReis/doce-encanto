@@ -9,6 +9,9 @@ import { login } from './routes/login-route';
 import { createProduct } from './routes/create-product-route';
 import { getAllProducts } from './routes/get-all-products-route';
 import { deleteProductRouter } from './routes/delete-product-route';
+import { createCart } from './routes/create-cart-router';
+import { getCart } from './routes/get-cart-router';
+import { addItemToCart } from './routes/add-item-to-cart-route';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -20,6 +23,9 @@ app.register(login);
 app.register(createProduct);
 app.register(getAllProducts);
 app.register(deleteProductRouter);
+app.register(createCart);
+app.register(getCart);
+app.register(addItemToCart);
 
 app
   .listen({
