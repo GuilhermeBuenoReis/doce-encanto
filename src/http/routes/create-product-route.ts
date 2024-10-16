@@ -8,6 +8,7 @@ const productSchema = z.object({
   description: z.string().min(1),
   price: z.number().positive(),
   imageUrl: z.string().url(),
+  type: z.string().optional(),
 });
 
 export const createProduct: FastifyPluginAsyncZod = async app => {

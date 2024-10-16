@@ -9,19 +9,21 @@ const productSchema = z.object({
   description: z.string().min(1),
   price: z.number().positive(),
   imageUrl: z.string().url(),
+  type: z.string().optional(),
 });
 
 class CreateProductController {
   async createProduct(req: FastifyRequest, res: FastifyReply) {
     try {
       const result = productSchema.parse(req.body);
-      const { name, description, price, imageUrl } = result;
+      const { name, description, price, imageUrl, type } = result;
 
       const product = await repository.create(
         name,
         description,
         price,
-        imageUrl
+        imageUrl,
+        type
       );
 
       return res.code(201).send(product);

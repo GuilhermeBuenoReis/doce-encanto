@@ -21,6 +21,7 @@ model Product {
   description String
   price       Float
   imageUrl    String     @default("temporary-imageUrl")
+  type        String?
   cartItems   CartItem[]
 }
 

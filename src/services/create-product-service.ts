@@ -6,6 +6,7 @@ interface ProductServiceRequest {
   description: string;
   price: number;
   imageUrl: string;
+  type?: string;
 }
 
 interface ProductServiceResponse {
@@ -20,12 +21,14 @@ export class CreateProductService {
     price,
     description,
     imageUrl,
+    type,
   }: ProductServiceRequest): Promise<ProductServiceResponse> {
     const product = await this.productsRepository.create(
       name,
       description,
       price,
-      imageUrl
+      imageUrl,
+      type
     );
 
     return { product };
