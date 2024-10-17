@@ -18,7 +18,7 @@ Siga os passos abaixo para rodar o projeto localmente:
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/doce-encanto-backend.git
+   git clone https://github.com/GuilhermeBuenoReis/doce-encanto.git
    ```
 
 2. **Entre no diretório do projeto**:
